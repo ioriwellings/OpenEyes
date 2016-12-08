@@ -210,28 +210,6 @@ static NSString *const JWRegister = @"register";
     return date;
 }
 
-// 索引条
-//- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//    
-//    NSMutableArray *array = [NSMutableArray array];
-//    // 转时间
-//    for (NSString *string in self.dateArray) {
-//        
-//        long long int date1 = (long long int)[string intValue];
-//        
-//        NSDate *date2 = [NSDate dateWithTimeIntervalSince1970:date1];
-//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//        [dateFormatter setDateFormat:@"dd"];
-//        NSString *date = [dateFormatter stringFromDate:date2];
-//        
-//        [array addObject:date];
-//    }
-//    
-//    NSArray *backDate = [array copy];
-//    
-//    return backDate;
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 250;
@@ -287,7 +265,7 @@ static NSString *const JWRegister = @"register";
     CGRect rect = [cell convertRect:cell.bounds toView:nil];
     CGFloat y = rect.origin.y;
     
-    self.pictureView = [[PictureView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight) imageArray:self.array index:indexPath.row];
+    self.pictureView = [[PictureView alloc] initWithFrame:CGRectMake(0, -64, kWidth, kHeight) imageArray:self.array index:indexPath.row];
     self.pictureView.offsetY = y;
     self.pictureView.animationTrans = cell.picture.transform;
     self.pictureView.animationView.picture.image = cell.picture.image;
@@ -368,32 +346,32 @@ static NSString *const JWRegister = @"register";
     }
     
 #pragma mark - 上滑隐藏下拉显示导航栏
-    NSLog(@"offsetY = %f", scrollView.contentOffset.y);
-    CGFloat offsetY = scrollView.contentOffset.y;
-    if (0 < offsetY) {
-        
-        if (44 <= offsetY) {
-            
-            [self setNavigationBarTransformProgress:1.0];
-        }
-        else {
-            
-            [self setNavigationBarTransformProgress:offsetY / 44.0];
-        }
-    }
-    else {
-        
-        [self setNavigationBarTransformProgress:0];
-        self.navigationController.navigationBar.backIndicatorImage = [UIImage new];
-    }
+//    NSLog(@"offsetY = %f", scrollView.contentOffset.y);
+//    CGFloat offsetY = scrollView.contentOffset.y;
+//    if (0 < offsetY) {
+//        
+//        if (44 <= offsetY) {
+//            
+//            [self setNavigationBarTransformProgress:1.0];
+//        }
+//        else {
+//            
+//            [self setNavigationBarTransformProgress:offsetY / 44.0];
+//        }
+//    }
+//    else {
+//        
+//        [self setNavigationBarTransformProgress:0];
+//        self.navigationController.navigationBar.backIndicatorImage = [UIImage new];
+//    }
 }
 
-- (void)setNavigationBarTransformProgress:(CGFloat)progress {
-    
-    self.tableView.transform = CGAffineTransformMakeTranslation(0, -44 * progress);
-    [self.navigationController.navigationBar jw_setTranslationY:-44 * progress]; // 导航栏偏移
-    [self.navigationController.navigationBar jw_setScrollViewAlpha:1 - progress]; // 透明度
-}
+//- (void)setNavigationBarTransformProgress:(CGFloat)progress {
+//    
+//    self.tableView.transform = CGAffineTransformMakeTranslation(0, -44 * progress);
+//    [self.navigationController.navigationBar jw_setTranslationY:-44 * progress]; // 导航栏偏移
+//    [self.navigationController.navigationBar jw_setScrollViewAlpha:1 - progress]; // 透明度
+//}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
